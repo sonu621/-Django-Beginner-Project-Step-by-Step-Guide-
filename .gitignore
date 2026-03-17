@@ -1,0 +1,254 @@
+# 🚀 Django Beginner Project (Step-by-Step Guide)
+
+This project is designed for beginners who want to learn Django from scratch.
+
+It explains:
+
+* Project structure
+* Apps and views
+* Templates and static files
+* URL routing
+* Handling form data
+
+---
+
+# 📁 Project Structure
+
+```bash
+testwebsite/
+│
+├── venv/                     # Virtual Environment
+├── manage.py                # Django management file
+│
+├── testwebsite/             # Main Project Folder
+│   ├── __init__.py
+│   ├── settings.py          # Project settings
+│   ├── urls.py              # Main URL config
+│   ├── asgi.py
+│   └── wsgi.py
+│
+├── website/                 # Django App
+│   ├── views.py             # Logic (functions)
+│   ├── urls.py              # App URLs
+│
+├── templates/
+│   ├── base.html            # Base layout
+│   └── website/
+│       ├── index.html
+│       ├── about.html
+│       └── contact.html
+│
+├── static/
+│   └── css/
+│       └── style.css
+```
+
+---
+
+# ⚙️ Installation & Setup
+
+## 1️⃣ Clone Project
+
+```bash
+git clone <your-repo-link>
+cd testwebsite
+```
+
+---
+
+## 2️⃣ Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+**Windows:**
+
+```bash
+venv\Scripts\activate
+```
+
+**Mac/Linux:**
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+## 3️⃣ Install Django
+
+```bash
+pip install django
+```
+
+---
+
+## 4️⃣ Run Server
+
+```bash
+python manage.py runserver
+```
+
+Open browser:
+
+```
+http://127.0.0.1:8000/
+```
+
+---
+
+# ⚙️ Important Configuration
+
+## 📌 settings.py
+
+### Add templates folder
+
+```python
+import os
+
+TEMPLATES = [
+    {
+        'DIRS': ['templates'],
+    },
+]
+```
+
+---
+
+### Add static files
+
+```python
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+```
+
+---
+
+# 🔗 URL Routing
+
+## Main URLs (`testwebsite/urls.py`)
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('website.urls')),
+]
+```
+
+---
+
+## App URLs (`website/urls.py`)
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+]
+```
+
+---
+
+# 🧠 Views Explanation
+
+## views.py
+
+```python
+from django.shortcuts import render
+
+def home(request):
+    result = ""
+
+    if request.method == "POST":
+        try:
+            num1 = int(request.POST.get("num1", 0))
+            num2 = int(request.POST.get("num2", 0))
+
+            if num1 > num2:
+                result = f"{num1} is greater than {num2}"
+            elif num1 < num2:
+                result = f"{num2} is greater than {num1}"
+            else:
+                result = "Both numbers are equal!"
+
+        except ValueError:
+            result = "Please enter valid numbers!"
+
+    return render(request, 'website/index.html', {"result": result})
+
+
+def about(request):
+    return render(request, 'website/about.html')
+
+
+def contact(request):
+    return render(request, 'website/contact.html')
+```
+
+---
+
+# 🌐 Pages in This Project
+
+## 🏠 Home Page
+
+* Takes 2 numbers from user
+* Compares them
+* Displays result
+
+## ℹ️ About Page
+
+* Static content
+
+## 📞 Contact Page
+
+* Static content
+
+---
+
+# 🎨 Templates
+
+* `base.html` → Common layout (header/footer)
+* `index.html` → Home page
+* `about.html` → About page
+* `contact.html` → Contact page
+
+---
+
+# 🎯 What You Learn
+
+* Django project structure
+* Apps in Django
+* Views and templates
+* URL routing system
+* Handling POST requests
+* Static files (CSS)
+
+---
+
+# 🚀 Future Improvements
+
+* Add Bootstrap styling
+* Use Django Forms
+* Add database models
+* Add login system
+* Deploy project online
+
+---
+
+# 🙌 Conclusion
+
+This is a beginner-friendly Django project to help you understand how everything connects:
+
+➡️ URLs → Views → Templates → User Interface
+
+Feel free to fork, modify, and build your own projects!
+
+---

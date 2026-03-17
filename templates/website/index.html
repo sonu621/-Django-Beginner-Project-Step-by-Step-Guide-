@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Hey Sonu 👋</h1>
+    <p>Welcome to your Django website.</p>
+    <!-- <button class="btn">Explore More</button> -->
+
+    <div class="container">
+        <h2>Compare Two Numbers</h2>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <label>Enter First Number:</label>
+            <input type="number" name="num1" required>
+
+            <br><br>
+
+            <label>Enter Second Number:</label>
+            <input type="number" name="num2" required>
+
+            <br><br>
+
+            <button type="submit">Compare</button>
+        </form>
+
+        <h3>{{ result }}</h3>
+    </div>
+</section>
+{% endblock %}
